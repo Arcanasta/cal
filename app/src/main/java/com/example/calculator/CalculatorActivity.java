@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 public class CalculatorActivity extends AppCompatActivity {
 
@@ -15,7 +16,7 @@ public class CalculatorActivity extends AppCompatActivity {
     private String currentInput = "";
     private double result = 0;
     private char operator = ' ';
-
+    private ArrayList<String> history = new ArrayList<>(); // 保存历史记录
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,14 @@ public class CalculatorActivity extends AppCompatActivity {
         setupOperatorButton(R.id.btnMultiply, '*');
         setupOperatorButton(R.id.btnDivide, '/');
 
+        // 科学计算按钮点击事件
+        setupScientificButton(R.id.btnSin, "sin");
+        setupScientificButton(R.id.btnCos, "cos");
+        setupScientificButton(R.id.btnTan, "tan");
+        setupScientificButton(R.id.btnLog, "log");
+        setupScientificButton(R.id.btnLn, "ln");
+        setupScientificButton(R.id.btnExp, "exp");
+
         // 清除按钮点击事件
         Button btnClear = findViewById(R.id.btnClear);
         btnClear.setOnClickListener(new View.OnClickListener() {
@@ -60,65 +69,34 @@ public class CalculatorActivity extends AppCompatActivity {
         btnEqual.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!currentInput.isEmpty() && operator != ' ') {
+                if (!currentInput.isEmpty()) {
                     double secondNumber = Double.parseDouble(currentInput);
                     result = calculate(result, secondNumber, operator);
                     DecimalFormat decimalFormat = new DecimalFormat("#.####");
-                    inputEditText.setText(decimalFormat.format(result));
+                    String resultText = decimalFormat.format(result);
+                    inputEditText.setText(resultText);
+
+                    // 保存到历史记录
+                    history.add(resultText);
+
                     currentInput = "";
                     operator = ' ';
                 }
             }
         });
-    }
 
-    private void setupNumberButton(int buttonId, final String number) {
-        Button button = findViewById(buttonId);
-        button.setOnClickListener(new View.OnClickListener() {
+        // 查看历史记录按钮点击事件
+        Button btnHistory = findViewById(R.id.btnHistory);
+        btnHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                currentInput += number;
-                inputEditText.setText(currentInput);
+                StringBuilder historyText = new StringBuilder();
+                for (String record : history) {
+                    historyText.append(record).append("\n");
+                }
+                inputEditText.setText(historyText.toString());
             }
         });
-    }
 
-    private void setupOperatorButton(int buttonId, final char op) {
-        Button button = findViewById(buttonId);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!currentInput.isEmpty()) {
-                    if (operator == ' ') {
-                        result = Double.parseDouble(currentInput);
-                    } else {
-                        double secondNumber = Double.parseDouble(currentInput);
-                        result = calculate(result, secondNumber, operator);
-                    }
-                    currentInput = "";
-                    operator = op;
-                    inputEditText.setText(result + String.valueOf(operator));
-                }
-            }
-        });
-    }
-
-    private double calculate(double num1, double num2, char op) {
-        switch (op) {
-            case '+':
-                return num1 + num2;
-            case '-':
-                return num1 - num2;
-            case '*':
-                return num1 * num2;
-            case '/':
-                if (num2 != 0) {
-                    return num1 / num2;
-                } else {
-                    return 0; // 处理除数为零的情况
-                }
-            default:
-                return num2;
-        }
-    }
-}
+        // 单
+
