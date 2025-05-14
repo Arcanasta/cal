@@ -1,110 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@drawable/yousa">
+    android:background="@drawable/gradient_background"
+    tools:context=".RegisterActivity">
 
+    <!-- 标题 -->
     <TextView
+        android:id="@+id/registerTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="注册"
-        android:textSize="50dp"
-        android:textColor="#055119"
-        android:layout_gravity="center" />
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="50dp" />
+
+    <!-- 用户名输入框 -->
     <EditText
         android:id="@+id/et_user_name"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="请输入账号"
-        android:textSize="20dp"
-        android:singleLine="true"
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:paddingLeft="6dp"
-        android:paddingTop="2dp"
-        android:paddingBottom="10dp" />
+        android:textSize="18sp"
+        android:background="@drawable/rounded_edit_text"
+        android:padding="16dp"
+        app:layout_constraintTop_toBottomOf="@id/registerTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp" />
+
+    <!-- 密码输入框 -->
     <EditText
         android:id="@+id/et_psw"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="请输入密码"
         android:inputType="textPassword"
-        android:textSize="20dp"
-        android:singleLine="true"
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:paddingLeft="6dp"
-        android:paddingTop="2dp"
-        android:paddingBottom="10dp" />
+        android:textSize="18sp"
+        android:background="@drawable/rounded_edit_text"
+        android:padding="16dp"
+        app:layout_constraintTop_toBottomOf="@id/et_user_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp" />
+
+    <!-- 确认密码输入框 -->
     <EditText
         android:id="@+id/et_pswAgain"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="请再次输入密码"
         android:inputType="textPassword"
-        android:textSize="20dp"
-        android:singleLine="true"
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:paddingLeft="6dp"
-        android:paddingTop="2dp"
-        android:paddingBottom="10dp"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="66dp"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="性别"
-            android:textSize="18dp"
-            android:layout_marginLeft="10dp"
-            android:paddingLeft="6dp"
-            android:layout_gravity="center" />
-        <RadioGroup
-            android:id="@+id/rg_gender"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:paddingLeft="6dp">
-            <RadioButton
-                android:id="@+id/girl"
-                android:layout_width="wrap_content"
-                android:layout_height="33dp"
-                android:text="女生"/>
-            <RadioButton
-                android:id="@+id/boy"
-                android:layout_width="wrap_content"
-                android:layout_height="33dp"
-                android:text="男生"/>
-        </RadioGroup>
-    </LinearLayout>
+        android:textSize="18sp"
+        android:background="@drawable/rounded_edit_text"
+        android:padding="16dp"
+        app:layout_constraintTop_toBottomOf="@id/et_psw"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp" />
 
+    <!-- 性别选择 -->
+    <TextView
+        android:id="@+id/genderLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="性别"
+        android:textSize="18sp"
+        android:textColor="@android:color/white"
+        app:layout_constraintTop_toBottomOf="@id/et_pswAgain"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="32dp" />
+
+    <RadioGroup
+        android:id="@+id/rg_gender"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/et_pswAgain"
+        app:layout_constraintStart_toEndOf="@id/genderLabel"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="32dp">
+
+        <RadioButton
+            android:id="@+id/girl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="女生"
+            android:textColor="@android:color/white" />
+
+        <RadioButton
+            android:id="@+id/boy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="男生"
+            android:textColor="@android:color/white" />
+    </RadioGroup>
+
+    <!-- 学校输入框 -->
     <EditText
-        android:layout_width="match_parent"
+        android:id="@+id/et_school"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="请输入学校"
-        android:textSize="20dp"
-        android:maxLength="15"
-        android:singleLine="true"
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:paddingLeft="6dp"
-        android:paddingTop="2dp"
-        android:paddingBottom="10dp"/>
+        android:textSize="18sp"
+        android:background="@drawable/rounded_edit_text"
+        android:padding="16dp"
+        app:layout_constraintTop_toBottomOf="@id/rg_gender"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp" />
+
+    <!-- 注册按钮 -->
     <Button
         android:id="@+id/btn_register"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="注册"
-        android:textSize="30dp"
-        android:layout_marginTop="30dp"/>
-</LinearLayout>
+        android:textSize="20sp"
+        android:backgroundTint="@color/primary"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="20dp"
+        android:padding="12dp"
+        app:layout_constraintTop_toBottomOf="@id/et_school"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
